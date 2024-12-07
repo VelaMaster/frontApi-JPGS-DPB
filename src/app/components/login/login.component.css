@@ -1,13 +1,55 @@
 .login-container {
-  max-width: 400px;
-  margin: 0 auto;
-  padding: 20px;
-  border: 1px solid #ddd;
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #c288bf;
+    border-radius: 10px;
+    background: #d4beef;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  }
+
+h2 {
+  text-align: center;
+  color: #6a2c91; /* Color del encabezado */
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+input[type="text"],
+input[type="password"] {
+  width: calc(100% - 10px);
+  padding: 10px;
+  margin-bottom: 15px;
+  border: none;
   border-radius: 5px;
-  background: #fff;
+  background-color: #ffffff; /* Fondo blanco para los inputs */
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus {
+  outline: none;
+  border: 2px solid #6a2c91; /* Borde al enfocar */
 }
 
 .error-message {
-  color: red;
-  margin-top: 10px;
+  color: rgb(199, 34, 34);
+  margin-top: -10px; /* Para que esté más cerca del input */
+}
+
+button {
+  width: 100%;
+  padding: 10px;
+  background-color: #1e6fe9; /* Color del botón */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #1b2968; /* Color del botón al pasar el mouse */
 }
