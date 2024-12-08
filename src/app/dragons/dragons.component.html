@@ -1,0 +1,47 @@
+<!-- src/app/components/dragon-list/dragon-list.component.html -->
+<div class="container mt-4">
+    <h2>Lista de Dragones</h2>
+  
+    <!-- Filtro -->
+    <input type="text" [(ngModel)]="searchTerm" (input)="filterDragons()" class="form-control mb-3" placeholder="Buscar dragón...">
+  
+    <!-- Tabla de dragones -->
+    <table class="table table-bordered table-striped">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Imagen</th>
+          <th>Nombre</th>
+          <th>Rareza</th>
+          <th>Elemento</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let dragon of dataSource">
+          <td>{{ dragon.id }}</td>
+          <td><img [src]="'http://127.0.0.1:8000' + dragon.imagen" alt="{{ dragon.nombre }}" width="50" height="50"></td>
+          <td>{{ dragon.nombre }}</td>
+          <td>{{ dragon.rareza }}</td>
+          <td>{{ dragon.elemento }}</td>
+          <td>
+            <button class="btn btn-warning btn-sm" (click)="editDragon(dragon)">Editar</button>
+            <button class="btn btn-danger btn-sm" (click)="deleteDragon(dragon.id)">Eliminar</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  
+    <!-- Paginación -->
+    <nav>
+      <ul class="pagination">
+        <li class="page-item" [class.disabled]="currentPage === 0">
+          <a class="page-link" href="#" (click)="changePage(-1)">Anterior</a>
+        </li>
+        <li class="page-item" [class.disabled]="currentPage === getTotalPages() - 1">
+          <a class="page-link" href="#" (click)="changePage(1)">Siguiente</a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+  
