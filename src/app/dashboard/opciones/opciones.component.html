@@ -1,0 +1,19 @@
+<div class="menu">
+    <div class="sidenav-header" *ngIf="loggedInUser" [class.collapsed]="sideNavCollapsed()">
+      <div class="header-text" [class.hide-header-text]="sideNavCollapsed()">
+        <span class="welcome-text">{{ loggedInUser.name }}</span>
+      </div>
+    </div>
+  
+    <ul class="nav flex-column">
+      <li *ngFor="let item of menuItems()" class="nav-item">
+        <a [routerLink]="item.link" class="nav-link">
+          <i class="bi {{ item.icon }}"></i>
+          <span *ngIf="!sideNavCollapsed()">{{ item.label }}</span>
+        </a>
+      </li>
+    </ul>
+    
+    <button *ngIf="loggedInUser" class="btn btn-danger" (click)="logout()">Cerrar sesión</button>
+  </div>
+  
