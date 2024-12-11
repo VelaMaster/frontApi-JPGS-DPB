@@ -5,6 +5,7 @@ export interface User {
   usuario: string;
   correo: string;
   contrasena: string;
+  imagen: string;
   created_at: string;
   updated_at: string;
 }

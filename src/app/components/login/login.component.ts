@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -14,19 +14,15 @@ export class LoginComponent {
 
   constructor(private authService: AuthService, private router: Router) {}
 
-  onLogin(): void {
-    this.authService.login(this.username, this.password).subscribe(
-      success => {
-        if (success) {
-          this.router.navigate(['/home']);
-        } else {
-          this.errorMessage = 'Usuario o contraseña incorrectos';
-        }
-      },
-      error => {
-        console.error('Error al intentar iniciar sesión:', error.message);
-        this.errorMessage = 'No se pudo conectar con el servidor. Inténtalo más tarde.';
+  login(): void {
+    this.authService.login(this.username, this.password).subscribe(success => {
+      if (success) {
+        this.router.navigate(['/home']);
+      } else {
+        this.errorMessage = 'Credenciales inválidas';
       }
-    );
+    }, error => {
+      this.errorMessage = 'Error al conectar con la API';
+    });
   }
 }

@@ -20,12 +20,10 @@ export class HomeComponent implements OnInit {
   currentPage: number = 1;
   itemsPerPage: number = 5;
 
-  // Modals
   showViewModal: boolean = false;
   showEditModal: boolean = false;
   selectedDragon: Dragon | null = null;
 
-  // Datos de edición
   editData = {
     nombre: '',
     rareza: '',

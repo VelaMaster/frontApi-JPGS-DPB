@@ -41,7 +41,6 @@
     <button (click)="goToPage(currentPage + 1)" [disabled]="currentPage === totalPages">Siguiente »</button>
   </nav>
 </main>
-
 <!-- Modal Ver -->
 <section *ngIf="showViewModal">
   <article>
@@ -57,7 +56,6 @@
     <button (click)="closeViewModal()">Cerrar</button>
   </article>
 </section>
-
 <!-- Modal Editar -->
 <section *ngIf="showEditModal">
   <article>

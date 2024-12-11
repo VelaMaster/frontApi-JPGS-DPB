@@ -8,6 +8,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'home', component: HomeComponent }, // home
   { path: 'users', component: UserListComponent },
+  { path: 'user-list', component: UserListComponent },
 
   { path: '', redirectTo: '/login', pathMatch: 'full' }, // x defecto
   { path: '**', redirectTo: '/login' }, // login errors

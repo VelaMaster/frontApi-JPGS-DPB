@@ -8,6 +8,7 @@ import { FormsModule } from '@angular/forms';
 import { HomeComponent } from './components/home/home.component';
 import { MenuComponent } from './components/menu/menu.component';
 import { UserListComponent } from './components/user-list/user-list.component';
+import { SearchComponent } from './components/search/search.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -15,6 +16,7 @@ import { UserListComponent } from './components/user-list/user-list.component';
     HomeComponent,
     MenuComponent,
     UserListComponent,
+    SearchComponent,
     
   ],
   imports: [
