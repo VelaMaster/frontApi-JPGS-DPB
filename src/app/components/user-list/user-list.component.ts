@@ -25,6 +25,7 @@ interface ApiResponse {
 })
 export class UserListComponent implements OnInit {
   usuarios: Usuario[] = [];
+  filteredUsuarios: Usuario[] = [];
   currentPage: number = 1;
   itemsPerPage: number = 5;
 
@@ -35,23 +36,33 @@ export class UserListComponent implements OnInit {
       .subscribe(response => {
         if (response.status && response.usuarios) {
           this.usuarios = response.usuarios;
+          this.filteredUsuarios = [...this.usuarios];
         }
       });
   }
 
   get totalPages(): number {
-    return Math.ceil(this.usuarios.length / this.itemsPerPage);
+    return Math.ceil(this.filteredUsuarios.length / this.itemsPerPage);
   }
 
   get paginatedUsers(): Usuario[] {
     const start = (this.currentPage - 1) * this.itemsPerPage;
     const end = start + this.itemsPerPage;
-    return this.usuarios.slice(start, end);
+    return this.filteredUsuarios.slice(start, end);
   }
 
   goToPage(page: number) {
     if (page >= 1 && page <= this.totalPages) {
       this.currentPage = page;
     }
+  }
+
+  onSearch(searchTerm: string) {
+    this.filteredUsuarios = this.usuarios.filter(usuario =>
+      usuario.nombre.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      usuario.apellido.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      usuario.usuario.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+    this.currentPage = 1;
   }
 }

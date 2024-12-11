@@ -1,0 +1,18 @@
+div {
+  margin-bottom: 10px; /* Ajusta el margen inferior del contenedor */
+}
+
+input[type="text"] {
+  width: 80%; /* Ajusta el ancho del campo de texto */
+  padding: 5px; /* Reduce el relleno interno */
+  border: 1px solid #ccc; /* Define el borde */
+  border-radius: 3px; /* Esquinas ligeramente redondeadas */
+  font-size: 14px; /* Texto más pequeño */
+  transition: border-color 0.3s ease; /* Suaviza el cambio de color del borde */
+}
+
+input[type="text"]:focus {
+  outline: none; /* Elimina el contorno del navegador */
+  border-color: #4CAF50; /* Cambia el color del borde al enfocarse */
+  box-shadow: 0 0 3px rgba(76, 175, 80, 0.5); /* Sombra sutil al enfocarse */
+}

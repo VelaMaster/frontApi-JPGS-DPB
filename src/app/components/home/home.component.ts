@@ -17,6 +17,7 @@ interface Dragon {
 })
 export class HomeComponent implements OnInit {
   dragons: Dragon[] = [];
+  filteredDragons: Dragon[] = [];
   currentPage: number = 1;
   itemsPerPage: number = 5;
 
@@ -40,23 +41,31 @@ export class HomeComponent implements OnInit {
   loadData() {
     this.http.get<Dragon[]>('http://127.0.0.1:8000/api/dragons').subscribe(data => {
       this.dragons = data;
+      this.filteredDragons = [...this.dragons]; // Inicialmente no hay filtro
     });
   }
 
   get totalPages(): number {
-    return Math.ceil(this.dragons.length / this.itemsPerPage);
+    return Math.ceil(this.filteredDragons.length / this.itemsPerPage);
   }
 
   get paginatedDragons(): Dragon[] {
     const start = (this.currentPage - 1) * this.itemsPerPage;
     const end = start + this.itemsPerPage;
-    return this.dragons.slice(start, end);
+    return this.filteredDragons.slice(start, end);
   }
 
   goToPage(page: number) {
     if (page >= 1 && page <= this.totalPages) {
       this.currentPage = page;
     }
+  }
+
+  onSearch(searchTerm: string) {
+    this.filteredDragons = this.dragons.filter(dragon =>
+      dragon.nombre.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+    this.currentPage = 1; // Reinicia la paginación al realizar una búsqueda
   }
 
   viewDragon(dragon: Dragon) {
@@ -66,7 +75,6 @@ export class HomeComponent implements OnInit {
 
   editDragon(dragon: Dragon) {
     this.selectedDragon = dragon;
-    // Cargar datos del dragón a editar
     this.editData = {
       nombre: dragon.nombre,
       rareza: dragon.rareza,
