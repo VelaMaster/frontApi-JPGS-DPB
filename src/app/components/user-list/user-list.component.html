@@ -1,0 +1,33 @@
+<header>
+  <app-menu></app-menu>
+  <h1>Listado de Usuarios</h1>
+</header>
+
+<main>
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Apellido</th>
+        <th>Usuario</th>
+        <th>Correo</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of paginatedUsers">
+        <td>{{ user.id }}</td>
+        <td>{{ user.nombre }}</td>
+        <td>{{ user.apellido }}</td>
+        <td>{{ user.usuario }}</td>
+        <td>{{ user.correo }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <nav>
+    <button (click)="goToPage(currentPage - 1)" [disabled]="currentPage === 1">« Anterior</button>
+    <span>Página {{ currentPage }} de {{ totalPages }}</span>
+    <button (click)="goToPage(currentPage + 1)" [disabled]="currentPage === totalPages">Siguiente »</button>
+  </nav>
+</main>
