@@ -1,11 +1,81 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Inicio</title>
-</head>
-<body>
-  <h1>Bienvenido al Home</h1>
-</body>
-</html>
+<header>
+  <h1>Listado de Dragones</h1>
+</header>
+
+<main>
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Imagen</th>
+        <th>Nombre</th>
+        <th>Rareza</th>
+        <th>Elemento</th>
+        <th>Descripción</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let dragon of paginatedDragons">
+        <td>{{ dragon.id }}</td>
+        <td>
+          <img [src]="'http://127.0.0.1:8000' + dragon.imagen" [alt]="dragon.nombre">
+        </td>
+        <td>{{ dragon.nombre }}</td>
+        <td>{{ dragon.rareza }}</td>
+        <td>{{ dragon.elemento }}</td>
+        <td>{{ dragon.descripcion }}</td>
+        <td>
+          <button (click)="viewDragon(dragon)">Ver</button>
+          <button (click)="editDragon(dragon)">Editar</button>
+          <button (click)="deleteDragon(dragon)">Eliminar</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <nav>
+    <button (click)="goToPage(currentPage - 1)" [disabled]="currentPage === 1">« Anterior</button>
+    <span>Página {{ currentPage }} de {{ totalPages }}</span>
+    <button (click)="goToPage(currentPage + 1)" [disabled]="currentPage === totalPages">Siguiente »</button>
+  </nav>
+</main>
+
+<!-- Modal Ver -->
+<section *ngIf="showViewModal">
+  <article>
+    <h2>Detalles del Dragón</h2>
+    <div *ngIf="selectedDragon">
+      <img [src]="'http://127.0.0.1:8000' + selectedDragon.imagen" [alt]="selectedDragon.nombre">
+      <p><strong>ID:</strong> {{ selectedDragon.id }}</p>
+      <p><strong>Nombre:</strong> {{ selectedDragon.nombre }}</p>
+      <p><strong>Rareza:</strong> {{ selectedDragon.rareza }}</p>
+      <p><strong>Elemento:</strong> {{ selectedDragon.elemento }}</p>
+      <p><strong>Descripción:</strong> {{ selectedDragon.descripcion }}</p>
+    </div>
+    <button (click)="closeViewModal()">Cerrar</button>
+  </article>
+</section>
+
+<!-- Modal Editar -->
+<section *ngIf="showEditModal">
+  <article>
+    <h2>Editar Dragón</h2>
+    <label>Nombre:
+      <input type="text" [(ngModel)]="editData.nombre">
+    </label>
+    <label>Rareza:
+      <input type="text" [(ngModel)]="editData.rareza">
+    </label>
+    <label>Elemento:
+      <input type="text" [(ngModel)]="editData.elemento">
+    </label>
+    <label>Descripción:
+      <textarea [(ngModel)]="editData.descripcion"></textarea>
+    </label>
+    <footer>
+      <button (click)="saveEdit()">Guardar</button>
+      <button (click)="closeEditModal()">Cancelar</button>
+    </footer>
+  </article>
+</section>
